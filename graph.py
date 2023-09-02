@@ -4,8 +4,14 @@ class Graph:
     @param nV: number of vertices
     """
     def __init__(self, nV: int):
-        self.nV = nV
+        try:
+            self.nV = nV
+        except ValueError as err:
+            print(err, "so num vertices is set to default value (10)")
+            self.nV = 10
+        
         self.nE = 0
+
         self.list = []
         for _ in range(nV):
             self.list.append([])
@@ -114,8 +120,8 @@ class Graph:
     def bfs(self, src: int, dest: int) -> None:
         try:
             self.vertex_in_bounds(src, dest)
-        except ValueError:
-            print("Vertex out of bounds")
+        except ValueError as err:
+            print(err)
             return
         
         print("TODO")
@@ -128,8 +134,8 @@ class Graph:
     def dfs(self, src: int, dest: int) -> None:
         try:
             self.vertex_in_bounds(src, dest)
-        except ValueError:
-            print("Vertex out of bounds")
+        except ValueError as err:
+            print(err)
             return
         
         print("TODO")
@@ -143,8 +149,8 @@ class Graph:
     def dijkstras(self, src: int, dest: int) -> None:
         try:
             self.vertex_in_bounds(src, dest)
-        except ValueError:
-            print("Vertex out of bounds")
+        except ValueError as err:
+            print(err)
             return
         
         print("TODO")
