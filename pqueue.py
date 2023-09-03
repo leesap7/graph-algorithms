@@ -16,6 +16,7 @@ class PQueue:
 
     """
     Sets the number of items in the priority queue
+    @param: items: the number of items
     """
     @n_items.setter
     def n_items(self, items: int) -> None:
@@ -23,6 +24,9 @@ class PQueue:
 
     """
     Adds a new item to the priority queue
+    @param src: the source vertex of the edge
+    @param to: the destination vertex
+    @param weight: weight of the edge
     """
     def enqueue(self, src: int, to: int, weight: int) -> None:
         # add the item to the end of the list

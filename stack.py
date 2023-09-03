@@ -8,6 +8,9 @@ class Stack:
 
     """
     Adds an item to the top of the stack
+    @param src: the source vertex of the edge
+    @param to: the destination vertex
+    @param weight: weight of the edge
     """
     def push(self, src: int, to: int, weight: int) -> None:
         self.list.insert(0, {"from": src, "to": to, "weight": weight})
@@ -32,6 +35,7 @@ class Stack:
 
     """
     Sets the number of items in the stack
+    @param: the number of items in the stack
     """
     @n_items.setter
     def n_items(self, items: int) -> None:

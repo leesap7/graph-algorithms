@@ -15,6 +15,7 @@ class Queue:
 
     """ 
     Sets the number of items in the queue
+    @param: the number of items in the queue
     """
     @n_items.setter
     def n_items(self, items: int) -> None:
@@ -22,6 +23,9 @@ class Queue:
 
     """ 
     Adds and item to the end of the queue
+    @param src: the source vertex of the edge
+    @param to: the destination vertex
+    @param weight: weight of the edge
     """
     def enqueue(self, src: int, to: int, weight: int) -> None:
         self.list.append({"from": src, "to": to, "weight": weight})
