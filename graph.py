@@ -105,7 +105,7 @@ class Graph:
     @param src: the source vertex
     @param dest: the destination vertex
     """
-    def contains_edge(self, src: int, dest: int) -> None:
+    def contains_edge(self, src: int, dest: int) -> bool:
         for edge in self.list[src]:
             if edge["to"] == dest:
                 return True
@@ -166,3 +166,4 @@ class Graph:
     """
     def kruskals(self) -> None:
         print("TODO")
+        
