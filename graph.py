@@ -228,6 +228,12 @@ class Graph:
     @param dest: the destination vertex
     """
     def dijkstras(self, src: int, dest: int) -> List[int]:
+        try:
+            self.vertex_in_bounds(src, dest)
+        except ValueError as err:
+            print(err)
+            return
+        
         print("TODO")
         
     """
