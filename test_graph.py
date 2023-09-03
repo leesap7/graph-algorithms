@@ -304,5 +304,51 @@ def test_dfs_large_graph():
     assert graph.dfs(12, 1) == []
     assert graph.dfs(20, 22) == [20, 22]
 
+def test_dijkstra_basic():
+    graph = Graph(5)
+    graph.add_edge(0, 1, 2)
+    graph.add_edge(0, 3, 1)
+    graph.add_edge(1, 2, 3)
+    graph.add_edge(2, 4, 5)
+    graph.add_edge(3, 4, 4)
+
+    assert graph.dijkstras(0, 4) == [0, 3, 4]
+
+    graph = Graph(5)
+    graph.add_edge(0, 1, 2)
+    graph.add_edge(1, 2, 3)
+
+    assert graph.dijkstras(0, 4) == []
+
+    graph = Graph(5)
+    graph.add_edge(0, 1, 2)
+    graph.add_edge(0, 3, 1)
+    graph.add_edge(1, 2, 3)
+    graph.add_edge(2, 4, 5)
+    graph.add_edge(3, 4, 9)
+
+    assert graph.dijkstras(0, 4) in [[0, 1 ,2 ,4], [0 ,3 ,4]]
+
+def test_dijkstras_large_graph():
+    graph = Graph(10)
+    graph.add_edge(0, 1, 2)
+    graph.add_edge(0, 3, 1)
+    graph.add_edge(1, 2, 3)
+    graph.add_edge(2, 4, 5)
+    graph.add_edge(3, 4, 4)
+    graph.add_edge(4, 5, 6)
+    graph.add_edge(5, 6, 7)
+    graph.add_edge(6, 7, 8)
+    graph.add_edge(7, 8, 9)
+    graph.add_edge(8, 9, 10)
+    graph.add_edge(9, 0, 11)
+    graph.add_edge(1, 5, 12)
+    graph.add_edge(2, 6, 13)
+    graph.add_edge(3, 7, 14)
+    graph.add_edge(4, 8, 15)
+
+    assert graph.dijkstras(0, 9) in [[0 ,1 ,2 ,4 ,5 ,6 ,7 ,8 ,9], [0 ,3 ,4 ,5 ,6 ,7 ,8 ,9], [0 ,3 ,7 ,8 ,9]]
+
+
 if __name__ == "__main__":
     main()
