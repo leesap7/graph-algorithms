@@ -1,4 +1,5 @@
 from queue import Queue
+from stack import Stack
 from typing import List
 
 class Graph:
@@ -168,14 +169,55 @@ class Graph:
     @param src: the source vertex
     @param dest: the destination vertex
     """
-    def dfs(self, src: int, dest: int) -> None:
+    def dfs(self, src: int, dest: int) -> List[int]:
         try:
             self.vertex_in_bounds(src, dest)
         except ValueError as err:
             print(err)
             return
         
-        print("TODO")
+        # setup
+        visited = [0 for _ in range(self.nV)]
+        pred = [-1 for _ in range(self.nV)]
+        pred[src] = src
+        s = Stack()
+        s.push(src, src, 0)
+
+        while not s.is_empty():
+            edge = s.pop()
+            if visited[edge["to"]]:
+                continue
+            
+            visited[edge["to"]] = 1
+            found = False
+            for vertex in self.list[edge["to"]]:
+                if pred[vertex["to"]] == -1:
+                    s.push(edge["to"], vertex["to"], vertex["weight"])
+                    pred[vertex["to"]] = edge["to"]
+                    if vertex["to"] == dest:
+                        found = True
+
+            if found == True:
+                break
+
+        if pred[dest] == -1:
+            print("Destination vertex is not reachable from source vertex")
+            return []
+        
+        i = dest
+        path = []
+        while (i != src):
+            path.append(i)
+            i = pred[i]
+        path.append(src)
+        path.reverse()
+
+        print("The path from the source to the destination vertex is:", end="")
+        for i in range(len(path)):
+            print(path[i], end="")
+        print()
+
+        return path
 
     """
     Finds the shortest path from the source to the destination vertex
