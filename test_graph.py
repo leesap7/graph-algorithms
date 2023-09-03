@@ -7,6 +7,7 @@ def main():
     test_graph_contains_edge()
     test_bfs_basic()
     test_bfs_small_graphs()
+    test_bfs_large_graph()
 
 def test_graph_print():
     graph = Graph(5)
