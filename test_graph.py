@@ -5,6 +5,8 @@ def main():
     test_graph_num_vertices()
     test_graph_num_edges()
     test_graph_contains_edge()
+    test_bfs_basic()
+    test_bfs_small_graphs()
 
 def test_graph_print():
     graph = Graph(5)
@@ -157,6 +159,94 @@ def test_graph_contains_edge():
     assert(graph.contains_edge(7, 4) == False)
     assert(graph.contains_edge(3, 6) == False)
     assert(graph.contains_edge(4, 1) == False)
+
+def test_bfs_basic():
+    graph = Graph(4)
+    graph.add_edge(0, 1, 1)
+    graph.add_edge(0, 2, 1)
+    graph.add_edge(1, 2, 1)
+    graph.add_edge(2, 0, 1)
+    graph.add_edge(2, 3, 1)
+    graph.add_edge(3, 3, 1)
+
+    path = graph.bfs(2, 3)
+    assert path == [2, 3]
+
+    path = graph.bfs(0, 3)
+    assert path == [0, 2, 3]
+
+    path = graph.bfs(3, 0)
+    assert path == []
+
+def test_bfs_small_graphs():
+    # One vertex
+    graph = Graph(1)
+    path = graph.bfs(0, 0)
+    assert path == [0]
+
+    # Disconnected vertices
+    graph = Graph(2)
+    path = graph.bfs(0, 1)
+    assert path == []
+
+    graph = Graph(2)
+    graph.add_edge(0, 1, 1)
+    path = graph.bfs(0, 1)
+    assert path == [0, 1]
+
+    graph = Graph(4)
+    graph.add_edge(0, 1, 1)
+    graph.add_edge(0, 2, 1)
+    graph.add_edge(1, 3, 1)
+    graph.add_edge(2, 3, 1)
+
+    path = graph.bfs(0, 3)
+    assert path == [0, 1, 3] or path == [0, 2, 3]
+
+    # cycles
+    graph = Graph(4)
+    graph.add_edge(0, 1, 1)
+    graph.add_edge(1, 2, 1)
+    graph.add_edge(2, 3, 1)
+    graph.add_edge(3, 0, 1)
+
+    path = graph.bfs(0, 3)
+    assert path == [0, 1, 2, 3]
+
+def test_bfs_large_graph():
+    graph = Graph(25)
+
+    # Add edges to the graph
+    graph.add_edge(0, 1, 1)
+    graph.add_edge(0, 2, 1)
+    graph.add_edge(1, 3, 1)
+    graph.add_edge(2, 4, 1)
+    graph.add_edge(3, 5, 1)
+    graph.add_edge(4, 6, 1)
+    graph.add_edge(5, 7, 1)
+    graph.add_edge(6, 8, 1)
+    graph.add_edge(7, 9, 1)
+    graph.add_edge(8, 10, 1)
+    graph.add_edge(9, 11, 1)
+    graph.add_edge(10, 12, 1)
+    graph.add_edge(11, 13, 1)
+    graph.add_edge(12, 14, 1)
+    graph.add_edge(13, 15, 1)
+    graph.add_edge(14, 16, 1)
+    graph.add_edge(15, 17, 1)
+    graph.add_edge(16, 18, 1)
+    graph.add_edge(17, 19, 1)
+    graph.add_edge(18, 20, 1)
+    graph.add_edge(19, 21, 1)
+    graph.add_edge(20, 22, 1)
+    graph.add_edge(21, 23, 1)
+    graph.add_edge(22,24 ,1)
+
+    assert graph.bfs(0 ,24) == [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
+    assert graph.bfs(24, 22) == []
+    assert graph.bfs(24, 0) == []
+    assert graph.bfs(3, 23) == [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]
+
 
 if __name__ == "__main__":
     main()

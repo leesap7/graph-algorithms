@@ -1,3 +1,6 @@
+from queue import Queue
+from typing import List
+
 class Graph:
     """
     Initialises a new Graph object with nV vertices
@@ -117,14 +120,48 @@ class Graph:
     @param src: the source vertex
     @param dest: the destination vertex
     """
-    def bfs(self, src: int, dest: int) -> None:
+    def bfs(self, src: int, dest: int) -> List[int]:
         try:
             self.vertex_in_bounds(src, dest)
         except ValueError as err:
             print(err)
             return
-        
-        print("TODO")
+        # setup
+        visited = [-1 for _ in range(self.nV)]
+        visited[src] = src
+        q = Queue()
+        q.enqueue(src, src, 0)
+
+        while not q.is_empty():
+            edge = q.dequeue()
+            if edge["to"] == dest:
+                break
+            
+            # visit each of the current vertex's neighbours
+            for vertex in self.list[edge["to"]]:
+                if visited[vertex["to"]] == -1:
+                    visited[vertex["to"]] = edge["to"]
+                    q.enqueue(edge["to"], vertex["to"], vertex["weight"])
+
+        if visited[dest] == -1: 
+            print("Destination vertex is not reachable from source vertex")
+            return []
+
+        # store the path from src to dest
+        i = dest
+        path = []
+        while (i != src):
+            path.append(i)
+            i = visited[i]
+        path.append(src)
+        path.reverse()
+
+        print("The path from the source to the destination vertex is:", end="")
+        for i in range(len(path)):
+            print(path[i], end="")
+        print()
+
+        return path
 
     """
     Finds a path from the source to the destination vertex using a Depth First Search.
@@ -166,4 +203,3 @@ class Graph:
     """
     def kruskals(self) -> None:
         print("TODO")
-        
