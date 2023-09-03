@@ -1,6 +1,8 @@
 from queue import Queue
 from stack import Stack
+from pqueue import PQueue
 from typing import List
+import sys
 
 class Graph:
     """
@@ -157,9 +159,9 @@ class Graph:
         path.append(src)
         path.reverse()
 
-        print("The path from the source to the destination vertex is:", end="")
+        print("The path from the source to the destination vertex is: ", end=" ")
         for i in range(len(path)):
-            print(path[i], end="")
+            print(path[i], end=" ")
         print()
 
         return path
@@ -212,9 +214,9 @@ class Graph:
         path.append(src)
         path.reverse()
 
-        print("The path from the source to the destination vertex is:", end="")
+        print("The path from the source to the destination vertex is: ", end=" ")
         for i in range(len(path)):
-            print(path[i], end="")
+            print(path[i], end=" ")
         print()
 
         return path
@@ -225,23 +227,19 @@ class Graph:
     @param src: the source vertex
     @param dest: the destination vertex
     """
-    def dijkstras(self, src: int, dest: int) -> None:
-        try:
-            self.vertex_in_bounds(src, dest)
-        except ValueError as err:
-            print(err)
-            return
-        
+    def dijkstras(self, src: int, dest: int) -> List[int]:
         print("TODO")
         
     """
     Finds a minimum spanning tree of the graph using Prim's algorithm
+    Assumes the graph is connected
     """
     def prims(self) -> None:
         print("TODO")
 
     """
-    Finds a minimum spanning tree of the graph using Kruskal's algorithm
+    Finds a minimum spanning tree of the graph using Kruskal's algorithm.
+    Assumes the graph is connected.
     """
     def kruskals(self) -> None:
         print("TODO")
